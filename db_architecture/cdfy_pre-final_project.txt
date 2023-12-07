@@ -1,0 +1,71 @@
+//////// accounts.app ////////
+Table Roles {
+  id int [pk]
+  title varchar
+  access_level int
+}
+
+Table Accounts {
+  id int [pk]
+  role int [ref: - Roles.id]
+  username varchar
+  first_name varchar
+  last_name varchar
+  email varchar
+  phone varchar
+  address varchar
+  avatar img
+  specialization varchar
+}
+//////////////////////////////
+
+
+
+//////// courses.app /////////
+Table Subjects {
+  id int [pk]
+  title varchar
+}
+
+Table Schedules {
+  id int [pk]
+  title varchar
+  schedule date_time
+}
+
+Table Age_Categories {
+  id int [pk]
+  title varchar
+}
+
+Table Courses {
+  id int [pk]
+  title varchar
+  subjects int [ref: < Subjects.id]
+  duration date_time
+  requirements int [ref: < Subjects.id]
+}
+/////////////////////////////
+
+
+
+//////// groups.app /////////
+Table Classrooms {
+  id int [pk]
+  title varchar
+  capacity int
+  is_active bool
+}
+
+Table Groups {
+  id int [pk]
+  title varchar
+  students int [ref: < Accounts.id]
+  mentor int [ref: - Accounts.id]
+  support int [ref: - Accounts.id]
+  manager int [ref: - Accounts.id]
+  classroom int [ref: - Classrooms.id]
+  course int [ref: - Courses.id]
+  schedule int [ref: - Schedules.id]
+  age_category int [ref: - Age_Categories.id]
+}
