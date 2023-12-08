@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
-from accounts.models import Role
 
 User = get_user_model()
 
@@ -54,9 +53,3 @@ class CustomUserDetailSerializer(serializers.ModelSerializer):
             'email',
             'phone',
         )
-
-
-class RoleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Role
-        fields = '__all__'

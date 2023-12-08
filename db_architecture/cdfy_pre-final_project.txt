@@ -1,9 +1,20 @@
-//////// accounts.app ////////
+//////// roles.app ////////
 Table Roles {
   id int [pk]
   title varchar
-  access_level int
+  permissions per
 }
+//////////////////////////////
+
+
+
+//////// accounts.app ////////
+
+// Table Access_Levels {
+//   id int [pk]
+//   level int
+//   description varchar
+// }
 
 Table Accounts {
   id int [pk]

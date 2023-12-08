@@ -19,15 +19,3 @@ class CustomUser(AbstractUser):
             "Unselect this instead of deleting accounts."
         ),
     )
-
-
-class Role(models.Model):
-    title = models.CharField(unique=True, max_length=255)
-    access_level = models.PositiveSmallIntegerField()
-
-    def __str__(self):
-        return f'{self.title} [{self.access_level}]'
-
-    class Meta:
-        verbose_name = 'Роль'
-        verbose_name_plural = 'Роли'
