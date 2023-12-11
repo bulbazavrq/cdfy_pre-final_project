@@ -12,15 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Role',
+            name='Subject',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, unique=True)),
-                ('access_level', models.PositiveSmallIntegerField()),
+                ('title', models.CharField(max_length=255)),
             ],
-            options={
-                'verbose_name': 'Роль',
-                'verbose_name_plural': 'Роли',
-            },
         ),
     ]

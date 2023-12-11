@@ -1,15 +1,19 @@
+from uuid import uuid4
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
+from accounts.managers import UserManager
 
 
 class CustomUser(AbstractUser):
-    phone = models.CharField(max_length=15, blank=True, verbose_name='Телефон')
-    address = models.CharField(max_length=255, blank=True, verbose_name='Адрес')
-    avatar = models.ImageField(upload_to='avatars/', verbose_name='Аватар')
-    specialization = models.CharField(max_length=255, blank=True, verbose_name='Специализация')
+    email = models.EmailField(_('email address'), unique=True)
+    username = models.CharField(max_length=100, blank=True)
+    first_name = models.CharField(_("first name"), max_length=150)
+    last_name = models.CharField(_("last name"), max_length=150)
+    activation_code = models.CharField(max_length=255, blank=True)
+    avatar = models.ImageField(upload_to='avatars', blank=True, default='avatars/default_avatar.jpg')
 
     is_active = models.BooleanField(
         _("active"),
@@ -19,3 +23,14 @@ class CustomUser(AbstractUser):
             "Unselect this instead of deleting accounts."
         ),
     )
+
+    objects = UserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return f'{self.email}'
+
+    def create_activation_code(self):
+        code = str(uuid4)
+        self.activation_code = code

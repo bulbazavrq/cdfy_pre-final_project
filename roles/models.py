@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Role(models.Model):
     title = models.CharField(unique=True, max_length=255)
     access_level = models.PositiveSmallIntegerField()
